@@ -22,7 +22,7 @@ class Names {
       }
     }
 
-    return Names(names, this.Proxy);
+    return new Names(names, this.Proxy);
   }
 
   filterURL(keyword) {
@@ -35,7 +35,7 @@ class Names {
       }
     }
 
-    return Names(names, this.Proxy);
+    return new Names(names, this.Proxy);
   }
 }
 
