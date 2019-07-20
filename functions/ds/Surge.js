@@ -69,13 +69,13 @@ class Surge {
   }
 
   list() {
-    return new Names(Object.keys(this.Proxy), this.Proxy)
+    return new Names(Object.keys(this.Proxy), this.Proxy);
   }
 
   preset(presetName) {
     if (presetName === 'netflix') {
       // default: HK+MO+TW
-      return this.list().filter('HKT+HKBN+CTM+江苏中转+HINET');
+      return this.list().filter('HKT+HKBN+CTM+江苏中转+HINET').generate();
     } else if (presetName === 'netflix_hk') {
       return this.list().filter('HKT+HKBN').generate();
     } else if (presetName === 'netflix_mo') {

@@ -48,5 +48,13 @@ exports.handler = function (event, context, callback) {
             statusCode: 200,
             body: result
         });
+    }).catch(err => {
+        return callback(null, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            statusCode: 400,
+            body: err
+        });
     })
 }
