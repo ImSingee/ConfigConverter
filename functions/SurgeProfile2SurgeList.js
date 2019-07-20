@@ -1,6 +1,6 @@
 const request = require('flyio');
 const isUrl = require('is-url');
-const { Surge } = require('../ds/Surge');
+const { Surge } = require('./ds/Surge');
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
