@@ -8,7 +8,7 @@ class Names {
 
   generate() {
     let result = '';
-    for (let name of names) {
+    for (let name of this.names) {
       result += `${name} = ${this.Proxy[name]}\n`
     }
     return result;
