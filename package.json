@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "build": "echo OK"
+  },
   "dependencies": {
     "atob": "^2.1.2",
     "flyio": "^0.6.14",
