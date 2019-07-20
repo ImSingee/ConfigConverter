@@ -1,5 +1,44 @@
 const ini = require('ini');
 
+class Names {
+  constructor(names, Proxy) {
+    this.names = names;
+    this.Proxy = Proxy;
+  }
+
+  generate() {
+    let result = '';
+    for (let name of names) {
+      result += `${name} = ${this.Proxy[name]}\n`
+    }
+    return result;
+  }
+
+  filter(keyword) {
+    const names = [];
+    for (let name of this.names) {
+      if (name.indexOf(keyword) !== -1) {
+        names.push(name);
+      }
+    }
+
+    return Names(names, this.Proxy);
+  }
+
+  filterURL(keyword) {
+    const names = [];
+    for (let name of this.names) {
+      const splitResult = this.Proxy[name].split(',');
+      const url = splitResult[1].trim();
+      if (url.indexOf(keyword) !== -1) {
+        names.push(name);
+      }
+    }
+
+    return Names(names, this.Proxy);
+  }
+}
+
 class Surge {
   constructor(profile) {
     const config = ini.parse(profile);
@@ -9,41 +48,14 @@ class Surge {
     this.Proxy = Proxy;
   }
 
-  generate(names) {
-    let result = '';
-    for (let name of names) {
-      result += `${name} = ${this.Proxy[name]}\n`
-    }
-    return result;
-  }
-
   list() {
-    return this.generate(Object.keys(this.Proxy));
+    return new Names(Object.keys(this.Proxy), this.Proxy)
   }
 
-  filter(keyword) {
-    const names = [];
-    for (let name in this.Proxy) {
-      if (name.indexOf(keyword) !== -1) {
-        names.push(name);
-      }
-    }
-
-    return this.generate(names);
+  preset(presetName) {
+    return this.list().generate();
   }
 
-  filterURL(keyword) {
-    const names = [];
-    for (let name in this.Proxy) {
-      const splitResult = this.Proxy[name].split(',');
-      const url = splitResult[1].trim();
-      if (url.indexOf(keyword) !== -1) {
-        names.push(name);
-      }
-    }
-
-    return this.generate(names);
-  }
 }
 
 module.exports = Surge;

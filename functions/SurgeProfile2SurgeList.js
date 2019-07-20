@@ -5,6 +5,7 @@ const Surge = require('./ds/Surge');
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
+    const preset = queryStringParameters['preset'];
     const filter = queryStringParameters['filter'];
     const filterURL = queryStringParameters['filter_url'];
 
@@ -26,12 +27,18 @@ exports.handler = function (event, context, callback) {
         const surge = new Surge(data);
         console.log('Build Surge object success.');
         let result;
-        if (filter) {
-            result = surge.filter(filter);
-        } else if (filterURL) {
-            result = surge.filterURL(filterURL);
+
+        if (preset) {
+            result = surge.preset(preset);
         } else {
             result = surge.list();
+            if (filter) {
+                result = result.filter(filter);
+            }
+            if (filterURL) {
+                result = result.filterURL(filterURL);
+            }
+            result = result.generate();
         }
 
         return callback(null, {
