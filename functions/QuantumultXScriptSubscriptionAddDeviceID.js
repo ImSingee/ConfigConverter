@@ -1,11 +1,11 @@
 const request = require('flyio');
 const isUrl = require('is-url');
+const { HOST } = process.env;
 
 exports.handler = function (event, context, callback) {
-    const { queryStringParameters, headers } = event;
+    const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
     const deviceId = queryStringParameters['id'];
-    const host = headers['Host'];
     
     console.log('url: ', url);
     console.log('deviceId: ', deviceId);
@@ -53,7 +53,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] != 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `https://${host}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
+                    currentLineElements[3] = `https://${HOST}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }
