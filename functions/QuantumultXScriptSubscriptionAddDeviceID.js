@@ -1,6 +1,6 @@
 const request = require('flyio');
 const isUrl = require('is-url');
-const { HOST } = process.env;
+const { URL: HOST } = process.env;
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
@@ -53,7 +53,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] != 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `https://${HOST}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
+                    currentLineElements[3] = `https://${HOST}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${currentLineElements[3]}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }
