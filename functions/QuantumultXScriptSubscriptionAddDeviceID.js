@@ -53,7 +53,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] != 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `https://${HOST}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${currentLineElements[3]}`;
+                    currentLineElements[3] = `${HOST}/api/QuantumultXScriptAddDeviceID?id=${deviceId}&src=${currentLineElements[3]}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }
