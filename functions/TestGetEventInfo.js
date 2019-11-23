@@ -4,6 +4,6 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 200,
-            body: JSON.stringify(event)
+            body: JSON.stringify({ event, context })
       });
 }
