@@ -5,7 +5,7 @@ const { URL: HOST } = process.env;
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
-    const deviceId = queryStringParameters['id'];
+    const deviceId = queryStringParameters['id'].replace(/\./, '');
     
     console.log('url: ', url);
     console.log('deviceId: ', deviceId);
