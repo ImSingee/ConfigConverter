@@ -54,7 +54,7 @@ exports.handler = function (event, context, callback) {
                     resultLines.push(singleLineTrimed);
                 } else {
                     currentLineElements[3] = `https://${host}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
-                    resultLines.push(currentLineElements.join('\n'));
+                    resultLines.push(currentLineElements.join(' '));
                 }
             }
             
@@ -65,7 +65,7 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 200,
-            body: resultLines.join(' ')
+            body: resultLines.join('\n')
         });
     }).catch(err => {
         return callback(null, {
