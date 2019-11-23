@@ -54,7 +54,7 @@ exports.handler = function (event, context, callback) {
                     resultLines.push(singleLineTrimed);
                 } else {
                     currentLineElements[3] = `https://${host}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
-                    resultLines.push(currentLineElements.join(' '));
+                    resultLines.push(currentLineElements.join('\n'));
                 }
             }
             
