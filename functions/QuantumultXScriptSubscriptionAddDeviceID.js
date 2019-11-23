@@ -40,11 +40,11 @@ exports.handler = function (event, context, callback) {
             const singleLineTrimed = singleLine.trim();
             if (singleLineTrimed == '') {
                 ;// Do nothing
-            } else if (singleLineTrimed.startsWith('hostname') {
+            } else if (singleLineTrimed.startsWith('hostname')) {
                 resultLines.push(singleLineTrimed);
-            } else if (singleLineTrimed.startsWith('#') {
+            } else if (singleLineTrimed.startsWith('#')) {
                 ;// Do nothing
-            } else if (singleLineTrimed.startsWith(';') {
+            } else if (singleLineTrimed.startsWith(';')) {
                 ;// Do nothing
             } else {
                 const currentLineElements = singleLineTrimed.split(/\s+/);
