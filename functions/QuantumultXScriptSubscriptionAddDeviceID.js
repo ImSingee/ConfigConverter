@@ -39,13 +39,13 @@ exports.handler = function (event, context, callback) {
         for (const singleLine of allLines) {
             const singleLineTrimed = singleLine.trim();
             if (singleLineTrimed == '') {
-                // Do nothing
+                ;// Do nothing
             } else if (singleLineTrimed.startsWith('hostname') {
                 resultLines.push(singleLineTrimed);
             } else if (singleLineTrimed.startsWith('#') {
-                // Do nothing
+                ;// Do nothing
             } else if (singleLineTrimed.startsWith(';') {
-                // Do nothing
+                ;// Do nothing
             } else {
                 const currentLineElements = singleLineTrimed.split(/\s+/);
                 if (currentLineElements.length < 4) {
@@ -53,7 +53,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] != 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `${host}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
+                    currentLineElements[3] = `https://${host}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${deviceId}&src=${url}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }
