@@ -5,10 +5,10 @@ const { URL: HOST } = process.env;
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
-    const deviceId = queryStringParameters['id'].replace(/\./g, '');
+    const deviceIdRaw = queryStringParameters['id'];
     
     console.log('url: ', url);
-    console.log('deviceId: ', deviceId);
+    console.log('deviceIdRaw: ', deviceIdRaw);
 
     if (!isUrl(url)) {
         console.log('URL is invlid');
@@ -17,10 +17,10 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 400,
-            body: "参数 src 无效，请检查是否提供了正确的脚本文件托管地址。"
+            body: "参数 src 无效，请检查是否提供了正确的脚本订阅文件托管地址。"
         });
     }
-    if (!deviceId) {
+    if (!deviceIdRaw) {
         console.log('deviceId is not found');
         return callback(null, {
             headers: {
@@ -30,6 +30,9 @@ exports.handler = function (event, context, callback) {
             body: "参数 id 无效，请检查是否提供了正确的设备 ID。"
         });
     }
+    
+    const deviceId = deviceIdRaw.replace(/\./g, '');
+    console.log('deviceId: ', deviceId);
 
     request.get(url).then(({ data }) => {
         console.log('File fetched success.');
