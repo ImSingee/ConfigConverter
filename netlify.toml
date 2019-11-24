@@ -7,11 +7,8 @@
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
-  [redirects.headers]
-    X-From = "Netlify"
-    X-Api-Key = "some-api-key-string"
     
 [[redirects]]
   from = "/*"
-  to = "/public/index.html"
+  to = "/dist/index.html"
   status = 200

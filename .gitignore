@@ -1,3 +1,17 @@
-.DS_Store
+# netlify
 .netlify/
+
+# node
 node_modules/
+/npm-debug.log*
+/yarn-error.log
+
+# production
+/dist
+
+# misc
+.DS_Store
+
+# umi
+.umi
+.umi-production
