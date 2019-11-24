@@ -7,8 +7,8 @@ export default {
       component: '../layouts/index',
       routes: [
         {
-          path: '/generator/QuantumultXScriptScriptionAddDeviceId',
-          component: './generator/QuantumultXScriptScriptionAddDeviceId',
+          path: '/generator/QuantumultXScriptSubscriptionAddDeviceID',
+          component: './generator/QuantumultXScriptSubscriptionAddDeviceID',
         },
         {
           path: '/',

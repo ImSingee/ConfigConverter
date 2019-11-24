@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Breadcrumb, Form, Row, Col, Input, Button, message } from 'antd';
-import styles from './QuantumultXScriptScriptionAddDeviceId.css';
+import styles from './QuantumultXScriptSubscriptionAddDeviceID.css';
 import URLSafeBase64 from 'urlsafe-base64';
 import copy from 'copy-to-clipboard';
 
-class QuantumultXScriptScriptionAddDeviceIdGenerateForm extends React.Component {
+class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Component {
   state = {
     showResult: false,
     result: ''
@@ -62,7 +62,7 @@ class QuantumultXScriptScriptionAddDeviceIdGenerateForm extends React.Component 
         const id = values.id.trim();
         const url = values.url.trim();
 
-        const result = `${document.location.origin}/api/QuantumultXScriptScriptionAddDeviceId?id=${URLSafeBase64.encode(Buffer.from(id))}&url=${encodeURI(url)}`
+        const result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${URLSafeBase64.encode(Buffer.from(id))}&url=${encodeURI(url)}`
         
 
         this.setState({
@@ -110,18 +110,18 @@ class QuantumultXScriptScriptionAddDeviceIdGenerateForm extends React.Component 
   }
 }
 
-const WrappedQuantumultXScriptScriptionAddDeviceIdGenerateForm = Form.create({ name: 'generate' })(QuantumultXScriptScriptionAddDeviceIdGenerateForm);
+const WrappedQuantumultXScriptSubscriptionAddDeviceIDGenerateForm = Form.create({ name: 'generate' })(QuantumultXScriptSubscriptionAddDeviceIDGenerateForm);
 
 export default function() {
   return (
     <div>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Generator</Breadcrumb.Item>
-        <Breadcrumb.Item>QuantumultXScriptScriptionAddDeviceId</Breadcrumb.Item>
+        <Breadcrumb.Item>QuantumultXScriptSubscriptionAddDeviceID</Breadcrumb.Item>
       </Breadcrumb>
       <h1>QuantumultX 脚本订阅批量生成设备 ID</h1>
       <div className={styles.normal}>具体使用方式请参考 <a href="https://t.me/singee_daily">https://t.me/singee_daily</a></div>
-      <WrappedQuantumultXScriptScriptionAddDeviceIdGenerateForm />
+      <WrappedQuantumultXScriptSubscriptionAddDeviceIDGenerateForm />
     </div>
   );
 }
