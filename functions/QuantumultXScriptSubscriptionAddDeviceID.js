@@ -1,14 +1,17 @@
 const request = require('flyio');
 const isUrl = require('is-url');
+
 const { URL: HOST } = process.env;
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
-    const deviceIdRaw = queryStringParameters['id'];
+    let deviceIdRaw = queryStringParameters['id'];
+    const deviceIdB64 = queryStringParameters['idb64'];
     
     console.log('url: ', url);
     console.log('deviceIdRaw: ', deviceIdRaw);
+    console.log('deviceIdB64: ', deviceIdB64);
 
     if (!isUrl(url)) {
         console.log('URL is invlid');
@@ -22,13 +25,18 @@ exports.handler = function (event, context, callback) {
     }
     if (!deviceIdRaw) {
         console.log('deviceId is not found');
-        return callback(null, {
-            headers: {
-                "Content-Type": "text/plain; charset=utf-8"
-            },
-            statusCode: 400,
-            body: "参数 id 无效，请检查是否提供了正确的设备 ID。"
-        });
+        if (!deviceIdB64) {
+            return callback(null, {
+                headers: {
+                    "Content-Type": "text/plain; charset=utf-8"
+                },
+                statusCode: 400,
+                body: "参数 id 无效，请检查是否提供了正确的设备 ID。"
+            });
+        } else {
+            const URLSafeBase64 = require('urlsafe-base64');
+            deviceIdRaw = URLSafeBase64.decode(deviceIdB64).toString();
+        }
     }
     
     const deviceId = deviceIdRaw.replace(/\./g, '');
@@ -68,7 +76,7 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 200,
-            body: resultLines.join('\n')
+            body: `;deviceId = ${deviceId}\n` + resultLines.join('\n')
         });
     }).catch(err => {
         return callback(null, {
