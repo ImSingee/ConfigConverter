@@ -14,6 +14,10 @@ export default {
           path: '/',
           component: '../pages/index',
         },
+        {
+          path: '/404',
+          component: '../pages/404',
+        },
       ],
     },
   ],
