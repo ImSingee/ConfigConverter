@@ -62,7 +62,7 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
         const id = values.id.trim();
         const url = values.url.trim();
 
-        const result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?id=${URLSafeBase64.encode(Buffer.from(id))}&url=${encodeURI(url)}`
+        const result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?idb64=${URLSafeBase64.encode(Buffer.from(id))}&src=${encodeURI(url)}`
         
 
         this.setState({
