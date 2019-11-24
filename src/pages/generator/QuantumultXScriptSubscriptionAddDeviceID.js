@@ -33,7 +33,7 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
         </Row>
         <Row>
           <Col span={24} key="url" style={{ display: "block" }}>
-            <Form.Item label="订阅链接">
+            <Form.Item label="脚本订阅链接">
               {getFieldDecorator('url', {
                 rules: [
                   {
