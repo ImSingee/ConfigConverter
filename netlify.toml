@@ -1,14 +1,23 @@
 [build]
   functions = "./functions"
   command = "yarn build"
-  publish = "dist"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200
   force = true
-    
+
+[[redirects]]
+  from = "/umi.css"
+  to = "/dist/umi.css"
+  status = 200
+
+[[redirects]]
+  from = "/umi.js"
+  to = "/dist/umi.js"
+  status = 200
+
 [[redirects]]
   from = "/*"
   to = "/dist/index.html"
