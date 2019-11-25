@@ -116,7 +116,8 @@ export default function() {
     <div>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Generator</Breadcrumb.Item>
-        <Breadcrumb.Item>QuantumultXScriptSubscriptionAddDeviceIDPreset</Breadcrumb.Item>
+        <Breadcrumb.Item>QuantumultXScriptSubscriptionAddDeviceID</Breadcrumb.Item>
+        <Breadcrumb.Item>Preset</Breadcrumb.Item>
       </Breadcrumb>
       <h1>QuantumultX 脚本订阅批量生成设备 ID 预设</h1>
       <div className={styles.normal}>具体使用方式请参考 <a href="https://t.me/singee_daily">https://t.me/singee_daily</a></div>
