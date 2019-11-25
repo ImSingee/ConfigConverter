@@ -64,7 +64,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] != 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `${HOST}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(deviceId)}&src=${encodeURI(currentLineElements[3])}`;
+                    currentLineElements[3] = `${HOST}/api/QXJSID?id=${encodeURI(deviceId)}&src=${encodeURI(currentLineElements[3])}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }
