@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Breadcrumb, Form, Row, Col, Input, Button, message } from 'antd';
-import styles from './QXAddDeviceID.css';
+import styles from './QXAddID.css';
 import URLSafeBase64 from 'urlsafe-base64';
 import copy from 'copy-to-clipboard';
 
-class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Component {
+class QXAddIDForm extends React.Component {
   state = {
     showResult: false,
     result: ''
@@ -110,18 +110,18 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
   }
 }
 
-const WrappedQuantumultXScriptSubscriptionAddDeviceIDGenerateForm = Form.create({ name: 'generate' })(QuantumultXScriptSubscriptionAddDeviceIDGenerateForm);
+const WrappedQXAddIDForm = Form.create({ name: 'generate' })(QXAddIDForm);
 
 export default function() {
   return (
     <div>
       <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>Generator</Breadcrumb.Item>
-        <Breadcrumb.Item>QuantumultXScriptSubscriptionAddDeviceID</Breadcrumb.Item>
+        <Breadcrumb.Item>QXAddID</Breadcrumb.Item>
       </Breadcrumb>
       <h1>QuantumultX 脚本订阅批量生成设备 ID</h1>
       <div className={styles.normal}>具体使用方式请参考 <a href="https://t.me/singee_daily">https://t.me/singee_daily</a></div>
-      <WrappedQuantumultXScriptSubscriptionAddDeviceIDGenerateForm />
+      <WrappedQXAddIDForm />
     </div>
   );
 }
