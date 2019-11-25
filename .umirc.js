@@ -11,6 +11,10 @@ export default {
           component: './generator/QuantumultXScriptSubscriptionAddDeviceID',
         },
         {
+          path: '/generator/QuantumultXScriptSubscriptionAddDeviceIDPreset',
+          component: './generator/QuantumultXScriptSubscriptionAddDeviceIDPreset',
+        },
+        {
           path: '/',
           component: '../pages/index',
         },
