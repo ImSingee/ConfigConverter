@@ -1,7 +1,7 @@
 const { checkPassword } = require('./protect/password');
 
 exports.handler = function (event, context, callback) {
-      if (!checkPassword(event)) {
+      if (!checkPassword(event, true)) {
             return callback(null, {
                 headers: {
                     "Content-Type": "text/plain; charset=utf-8"
