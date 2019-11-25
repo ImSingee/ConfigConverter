@@ -9,8 +9,8 @@
 演示地址为 `https://qx.netlify.com/` 后接以下入口
 
 - `/api/SurgeProfile2SurgeList` 将 Surge 配置文件转换为 List
-- `/api/QXJSID` [将 QX 脚本中添加设备 ID](https://t.me/singee_daily/10)
-- `/api/QXAddID` [自动为 QX 脚本订阅添加设备 ID 行](https://t.me/singee_daily/7)
+- `/api/QXJSID` [将 QX 中单个 JS 脚本添加设备 ID](https://t.me/singee_daily/10)
+- `/api/QXAddID` [将 QX 脚本订阅添加设备 ID 行](https://t.me/singee_daily/7)
 
 ## 自部署
 
