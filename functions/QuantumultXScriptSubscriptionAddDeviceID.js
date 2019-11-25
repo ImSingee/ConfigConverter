@@ -4,27 +4,61 @@ const isUrl = require('is-url');
 const URLSafeBase64 = require('urlsafe-base64');
 const QueryString = require('query-string');
 
-const { URL: HOST } = process.env;
+const { URL: HOST, PRESET_NUMBER } = process.env;
+const PRESETS = {}
+if (PRESET_NUMBER > 0) {
+    for (let i = 1; i <= PRESET_NUMBER; i++) {
+        PRESETS[i] = process.env[`PRESET_${i}`]
+    }
+}
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
+    const preset = Number(queryStringParameters['preset']);
     const paramsB64 = queryStringParameters['b64'];
     let url, deviceId;
 
-    if (paramsB64) {
-        const params = QueryString.parse(URLSafeBase64.decode(paramsB64).toString());
-        url = params.src;
-        deviceId = params.id;
-    } else {
-        url = queryStringParameters['src'];
-        const deviceIdRaw = queryStringParameters['id'];
-        if (deviceIdRaw) {
-            deviceId = deviceIdRaw.replace(/\./g, '');
+    if (isNaN(preset)) {
+        if (paramsB64) {
+            const params = QueryString.parse(URLSafeBase64.decode(paramsB64).toString());
+            url = params.src;
+            deviceId = params.id;
         } else {
-            const deviceIdB64 = queryStringParameters['idb64'];
-            deviceId = URLSafeBase64.decode(deviceIdB64).toString();
+            url = queryStringParameters['src'];
+            const deviceIdRaw = queryStringParameters['id'];
+            if (deviceIdRaw) {
+                deviceId = deviceIdRaw.replace(/\./g, '');
+            } else {
+                const deviceIdB64 = queryStringParameters['idb64'];
+                deviceId = URLSafeBase64.decode(deviceIdB64).toString();
+            }
+            
         }
-        
+    } else {
+        if (preset > 0 && preset <= PRESET_NUMBER) {
+            const paramsStr = PRESETS[preset];
+            if (!paramsStr) {
+                return callback(null, {
+                    headers: {
+                        "Content-Type": "text/plain; charset=utf-8"
+                    },
+                    statusCode: 400,
+                    body: "参数 preset 对应的预设不存在。"
+                });
+            }
+
+            const params = QueryString.parse(paramsStr);
+            url = params.src;
+            deviceId = params.id;
+        } else {
+            return callback(null, {
+                headers: {
+                    "Content-Type": "text/plain; charset=utf-8"
+                },
+                statusCode: 400,
+                body: "参数 preset 不在允许的范围内。"
+            });
+        }
     }
     
     console.log('url: ', url);
@@ -59,7 +93,7 @@ exports.handler = function (event, context, callback) {
         
         for (const singleLine of allLines) {
             const singleLineTrimed = singleLine.trim();
-            if (singleLineTrimed == '') {
+            if (singleLineTrimed === '') {
                 ;// Do nothing
             } else if (singleLineTrimed.startsWith('hostname')) {
                 resultLines.push(singleLineTrimed);
@@ -71,7 +105,7 @@ exports.handler = function (event, context, callback) {
                 const currentLineElements = singleLineTrimed.split(/\s+/);
                 if (currentLineElements.length < 4) {
                     resultLines.push(singleLineTrimed);
-                } else if (currentLineElements[2] != 'script-response-body') {
+                } else if (currentLineElements[2] !== 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
                     currentLineElements[3] = `${HOST}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(deviceId)}&src=${encodeURI(currentLineElements[3])}`;
@@ -86,7 +120,7 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 200,
-            body: `;deviceId = ${deviceId}\n` + resultLines.join('\n')
+            body: `;deviceId = ${deviceId}\n;url = ${url}\n\n` + resultLines.join('\n')
         });
     }).catch(err => {
         return callback(null, {
