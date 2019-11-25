@@ -8,7 +8,7 @@ const { checkPassword } = require('./protect/password');
 const { URL: HOST, PRESET_NUMBER } = process.env;
 
 const PRESETS = {};
-if (PRESET_NUMBER > 0) {
+if (Number(PRESET_NUMBER) > 0) {
     for (let i = 1; i <= PRESET_NUMBER; i++) {
         PRESETS[i] = process.env[`PRESET_${i}`];
     }
