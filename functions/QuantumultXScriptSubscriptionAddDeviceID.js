@@ -28,6 +28,7 @@ exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
     const preset = Number(queryStringParameters['preset']);
     const paramsB64 = queryStringParameters['b64'];
+    const password = queryStringParameters['pwd'] || '';
     let url, deviceId;
 
     if (isNaN(preset)) {
@@ -120,7 +121,7 @@ exports.handler = function (event, context, callback) {
                 } else if (currentLineElements[2] !== 'script-response-body') {
                     resultLines.push(singleLineTrimed);
                 } else {
-                    currentLineElements[3] = `${HOST}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(deviceId)}&src=${encodeURI(currentLineElements[3])}`;
+                    currentLineElements[3] = `${HOST}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(deviceId)}&src=${encodeURI(currentLineElements[3])}&pwd=${encodeURI(password)}`;
                     resultLines.push(currentLineElements.join(' '));
                 }
             }

@@ -1,8 +1,19 @@
 const request = require('flyio');
 const isUrl = require('is-url');
 const Surge = require('./ds/Surge');
+const { checkPassword } = require('./protect/password');
 
 exports.handler = function (event, context, callback) {
+    if (!checkPassword(event)) {
+        return callback(null, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            statusCode: 401,
+            body: "未提供密码或提供的密码不正确。"
+        });
+    }
+
     const { queryStringParameters } = event;
     const url = queryStringParameters['src'];
     const preset = queryStringParameters['preset'];
