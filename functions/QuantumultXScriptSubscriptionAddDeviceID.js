@@ -2,6 +2,8 @@ const request = require('flyio');
 const isUrl = require('is-url');
 
 const URLSafeBase64 = require('urlsafe-base64');
+const QueryString = require('query-string');
+
 const { URL: HOST } = process.env;
 
 exports.handler = function (event, context, callback) {
@@ -10,9 +12,9 @@ exports.handler = function (event, context, callback) {
     let url, deviceId;
 
     if (paramsB64) {
-        const params = URLSafeBase64.decode(paramsB64).toString();
-        url = decodeURI(params.src);
-        deviceId = decodeURI(params.id);
+        const params = QueryString.parse(URLSafeBase64.decode(paramsB64).toString());
+        url = params.src;
+        deviceId = params.id;
     } else {
         url = queryStringParameters['src'];
         const deviceIdRaw = queryStringParameters['id'];
