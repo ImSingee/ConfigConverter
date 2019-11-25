@@ -10,7 +10,7 @@
 
 - `/api/SurgeProfile2SurgeList` 将 Surge 配置文件转换为 List
 - `/api/QuantumultXScriptAddDeviceID` [将 QX 脚本中添加设备 ID](https://t.me/singee_daily/10)
-- `/api/QuantumultXScriptSubscriptionAddDeviceID` [自动为 QX 脚本订阅添加设备 ID 行](https://t.me/singee_daily/7)
+- `/api/QXAddID` [自动为 QX 脚本订阅添加设备 ID 行](https://t.me/singee_daily/7)
 
 ## 自部署
 
