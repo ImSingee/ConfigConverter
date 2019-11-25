@@ -7,7 +7,7 @@ export default function() {
         <div>
           You may want to <a href="/">
             Move to Homepage
-          </a> or <a href="https://github.com/ImSingee/ConfigConverter">
+          </a> or <a href="https://github.com/wangfei021325/ConfigConverter">
             Move to Github
           </a>
         </div>
