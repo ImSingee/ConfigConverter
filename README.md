@@ -1,4 +1,4 @@
-# ConfigConverter Status Success(blue)/Building(yellow)/Failed(red)
+# ConfigConverter
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/549d28b7-12f7-404b-8c77-01381f573b62/deploy-status)](https://app.netlify.com/sites/qx/deploys)
 
