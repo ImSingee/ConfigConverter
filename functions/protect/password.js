@@ -1,11 +1,11 @@
 const { FORCE_PASSWORD: FORCE_PASSWORD_str, PASSWORD } = process.env;
 const FORCE_PASSWORD = FORCE_PASSWORD_str === 'True' ? true : false;
 
-function checkPassword(event) {
+function checkPassword(event, force = false) {
     const { queryStringParameters } = event;
     const { pwd: password } = queryStringParameters;
 
-    if (!FORCE_PASSWORD) return true;
+    if (!force && !FORCE_PASSWORD) return true;
 
     return password === PASSWORD;
 }
