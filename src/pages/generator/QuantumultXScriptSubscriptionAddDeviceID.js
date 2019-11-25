@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Breadcrumb, Form, Row, Col, Input, Button, message } from 'antd';
-import styles from './QuantumultXScriptSubscriptionAddDeviceID.css';
+import styles from './QXAddDeviceID.css';
 import URLSafeBase64 from 'urlsafe-base64';
 import copy from 'copy-to-clipboard';
 
