@@ -19,4 +19,4 @@
 
 上述网址仅供演示使用，随时可能停止。自行使用请点击下面按钮部署至 netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ImSingee/ConfigConverter)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/wangfei021325/ConfigConverter)
