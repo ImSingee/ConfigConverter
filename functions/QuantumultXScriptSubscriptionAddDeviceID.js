@@ -43,7 +43,19 @@ exports.handler = function (event, context, callback) {
                 deviceId = deviceIdRaw.replace(/\./g, '');
             } else {
                 const deviceIdB64 = queryStringParameters['idb64'];
-                deviceId = URLSafeBase64.decode(deviceIdB64).toString();
+                if (deviceIdB64) {
+                    deviceId = URLSafeBase64.decode(deviceIdB64).toString();
+                } else {
+                    console.log('deviceIdB64 is not found');
+                    return callback(null, {
+                        headers: {
+                            "Content-Type": "text/plain; charset=utf-8"
+                        },
+                        statusCode: 400,
+                        body: "参数 id （或其他替换结果）无效，请检查是否提供了正确的设备 ID。"
+                    });
+                }
+                
             }
             
         }
