@@ -1,7 +1,8 @@
 # ConfigConverter
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b8d38664-9076-461a-aa8e-d419ee365f9c/deploy-status)](https://app.netlify.com/sites/config-converter/deploys)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/549d28b7-12f7-404b-8c77-01381f573b62/deploy-status)](https://app.netlify.com/sites/qx/deploys)
+
+状态：Success/Building/Failed
 
 将各种代理软件的配置文件进行转换
 
