@@ -17,6 +17,15 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
     return (
       <>
         <Row>
+          <Col span={24} key="password" style={{ display: "block" }}>
+            <Form.Item label="密码">
+              {getFieldDecorator('password', {
+                required: false,
+              })(<Input placeholder="未设定密码请留空" />)}
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>
           <Col span={24} key="id" style={{ display: "block" }}>
             <Form.Item label="设备 ID">
               {getFieldDecorator('id', {
@@ -61,9 +70,14 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
       } else {
         const id = values.id.trim();
         const url = values.url.trim();
+        const password = values.password.trim();
 
-        const params = URLSafeBase64.encode(Buffer.from(`id=${encodeURI(id)}&src=${encodeURI(url)}`))
-        const result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?b64=${params}`
+        const paramsB64 = URLSafeBase64.encode(Buffer.from(`id=${encodeURI(id)}&src=${encodeURI(url)}`));
+        let result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?b64=${paramsB64}`;
+
+        if (password) {
+          result += `&pwd=${password}`;
+        }
 
         this.setState({
           showResult: true,
