@@ -3,16 +3,28 @@ const isUrl = require('is-url');
 
 const URLSafeBase64 = require('urlsafe-base64');
 const QueryString = require('query-string');
+const { checkPassword } = require('./protect/password');
 
 const { URL: HOST, PRESET_NUMBER } = process.env;
-const PRESETS = {}
+
+const PRESETS = {};
 if (PRESET_NUMBER > 0) {
     for (let i = 1; i <= PRESET_NUMBER; i++) {
-        PRESETS[i] = process.env[`PRESET_${i}`]
+        PRESETS[i] = process.env[`PRESET_${i}`];
     }
 }
 
 exports.handler = function (event, context, callback) {
+    if (!checkPassword(event)) {
+        return callback(null, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            statusCode: 401,
+            body: "未提供密码或提供的密码不正确。"
+        });
+    }
+
     const { queryStringParameters } = event;
     const preset = Number(queryStringParameters['preset']);
     const paramsB64 = queryStringParameters['b64'];
@@ -89,7 +101,7 @@ exports.handler = function (event, context, callback) {
     request.get(url).then(({ data }) => {
         console.log('File fetched success.');
         const allLines = data.split('\n');
-        const resultLines = new Array();
+        const resultLines = [];
         
         for (const singleLine of allLines) {
             const singleLineTrimed = singleLine.trim();
