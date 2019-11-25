@@ -21,6 +21,12 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
             <Form.Item label="密码">
               {getFieldDecorator('password', {
                 required: false,
+                rules: [
+                  {
+                    whitespace: true,
+                    message: '密码不能为纯空格',
+                  },
+                ]
               })(<Input placeholder="未设定密码请留空" />)}
             </Form.Item>
           </Col>
@@ -66,17 +72,18 @@ class QuantumultXScriptSubscriptionAddDeviceIDGenerateForm extends React.Compone
     e.preventDefault();
     this.props.form.validateFields((errors, values) => {
       if (errors) {
+        console.log(errors);
         this.setState({showResult: false})
       } else {
         const id = values.id.trim();
-        const url = values.url.trim();
-        const password = values.password.trim();
+        const url = values.url;
+        const password = values.password;
 
         const paramsB64 = URLSafeBase64.encode(Buffer.from(`id=${encodeURI(id)}&src=${encodeURI(url)}`));
         let result = `${document.location.origin}/api/QuantumultXScriptSubscriptionAddDeviceID?b64=${paramsB64}`;
 
         if (password) {
-          result += `&pwd=${password}`;
+          result += `&pwd=${password.trim()}`;
         }
 
         this.setState({

@@ -21,6 +21,12 @@ class QuantumultXScriptAddDeviceIDGenerateForm extends React.Component {
             <Form.Item label="密码">
               {getFieldDecorator('password', {
                 required: false,
+                rules: [
+                  {
+                    whitespace: true,
+                    message: '密码不能为纯空格',
+                  },
+                ]
               })(<Input placeholder="未设定密码请留空" />)}
             </Form.Item>
           </Col>
@@ -70,12 +76,12 @@ class QuantumultXScriptAddDeviceIDGenerateForm extends React.Component {
       } else {
         const id = values.id.trim();
         const url = values.url.trim();
-        const password = values.password.trim();
+        const password = values.password;
 
         let result = `${document.location.origin}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(id)}&src=${encodeURI(url)}`;
 
         if (password) {
-          result += `&pwd=${password}`;
+          result += `&pwd=${password.trim()}`;
         }
 
         this.setState({
