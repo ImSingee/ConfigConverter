@@ -1,17 +1,33 @@
 const request = require('flyio');
 const isUrl = require('is-url');
 
+const URLSafeBase64 = require('urlsafe-base64');
 const { URL: HOST } = process.env;
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
-    const url = queryStringParameters['src'];
-    let deviceIdRaw = queryStringParameters['id'];
-    const deviceIdB64 = queryStringParameters['idb64'];
+    const paramsB64 = queryStringParameters['b64'];
+    let url, deviceId;
+
+    if (paramsB64) {
+        const params = URLSafeBase64.decode(paramsB64).toString();
+        url = decodeURI(params.src);
+        deviceId = decodeURI(params.id);
+    } else {
+        url = queryStringParameters['src'];
+        const deviceIdRaw = queryStringParameters['id'];
+        if (deviceIdRaw) {
+            deviceId = deviceIdRaw.replace(/\./g, '');
+        } else {
+            const deviceIdB64 = queryStringParameters['idb64'];
+            deviceId = URLSafeBase64.decode(deviceIdB64).toString();
+        }
+        
+    }
     
     console.log('url: ', url);
-    console.log('deviceIdRaw: ', deviceIdRaw);
-    console.log('deviceIdB64: ', deviceIdB64);
+    console.log('deviceId: ', deviceId);
+
 
     if (!isUrl(url)) {
         console.log('URL is invlid');
@@ -23,24 +39,16 @@ exports.handler = function (event, context, callback) {
             body: "参数 src 无效，请检查是否提供了正确的脚本订阅文件托管地址。"
         });
     }
-    if (!deviceIdRaw) {
+    if (!deviceId) {
         console.log('deviceId is not found');
-        if (!deviceIdB64) {
-            return callback(null, {
-                headers: {
-                    "Content-Type": "text/plain; charset=utf-8"
-                },
-                statusCode: 400,
-                body: "参数 id 无效，请检查是否提供了正确的设备 ID。"
-            });
-        } else {
-            const URLSafeBase64 = require('urlsafe-base64');
-            deviceIdRaw = URLSafeBase64.decode(deviceIdB64).toString();
-        }
+        return callback(null, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            statusCode: 400,
+            body: "参数 id （或其他替换结果）无效，请检查是否提供了正确的设备 ID。"
+        });
     }
-    
-    const deviceId = deviceIdRaw.replace(/\./g, '');
-    console.log('deviceId: ', deviceId);
 
     request.get(url).then(({ data }) => {
         console.log('File fetched success.');
