@@ -2,6 +2,16 @@
   functions = "./functions"
   command = "yarn build"
 
+[template.environment]
+  FORCE_PASSWORD = "设置为 True 表示强制设置密码"
+  PASSWORD = "设置一个密码"
+  PRESET_NUMBER = "启用的预设数量"
+  PRESET_1 = "预设 1 的参数"
+  PRESET_2 = "预设 2 的参数"
+  PRESET_3 = "预设 3 的参数"
+  PRESET_4 = "预设 4 的参数"
+  PRESET_5 = "预设 5 的参数"
+
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
