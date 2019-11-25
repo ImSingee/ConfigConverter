@@ -8,7 +8,7 @@
 
 ## API Endpoint
 
-演示地址为 `https://config-converter.netlify.com/` 后接以下入口
+演示地址为 `https://qx.netlify.com/` 后接以下入口
 
 - `/api/SurgeProfile2SurgeList` 将 Surge 配置文件转换为 List
 - `/api/QuantumultXScriptAddDeviceID` [将 QX 脚本中添加设备 ID](https://t.me/singee_daily/10)
