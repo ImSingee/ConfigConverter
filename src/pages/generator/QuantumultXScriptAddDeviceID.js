@@ -78,7 +78,7 @@ class QuantumultXScriptAddDeviceIDGenerateForm extends React.Component {
         const url = values.url.trim();
         const password = values.password;
 
-        let result = `${document.location.origin}/api/QuantumultXScriptAddDeviceID?id=${encodeURI(id)}&src=${encodeURI(url)}`;
+        let result = `${document.location.origin}/api/QuantumultXScriptAddDeviceID?id=${encodeURIComponent(id)}&src=${encodeURIComponent(url)}`;
 
         if (password) {
           result += `&pwd=${password.trim()}`;

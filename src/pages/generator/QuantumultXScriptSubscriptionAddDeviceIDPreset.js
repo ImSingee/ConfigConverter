@@ -62,7 +62,7 @@ class QuantumultXScriptSubscriptionAddDeviceIDPresetGenerateForm extends React.C
         const id = values.id.trim();
         const url = values.url.trim();
 
-        const params = `id=${encodeURI(id)}&src=${encodeURI(url)}`;
+        const params = `id=${encodeURIComponent(id)}&src=${encodeURIComponent(url)}`;
         
         this.setState({
           showResult: true,
