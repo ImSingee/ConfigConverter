@@ -1,7 +1,6 @@
+const child_process = require("child_process");
 const request = require('flyio');
 const isUrl = require('is-url');
-const Surge = require('./ds/Surge');
-const { checkPassword } = require('./protect/password');
 
 exports.handler = function (event, context, callback) {
     const { queryStringParameters } = event;
@@ -20,24 +19,30 @@ exports.handler = function (event, context, callback) {
         });
     }
 
-    request.get(url).then(({ data }) => {
-        console.log('File fetched success.');
-
-        return callback(null, {
-            headers: {
-                "Content-Type": "text/plain; charset=utf-8"
-            },
-            statusCode: 200,
-            body: 'Download Success' 
-        });
-    }).catch(err => {
-        console.log('Error', err);
-        return callback(null, {
-            headers: {
-                "Content-Type": "text/plain; charset=utf-8"
-            },
-            statusCode: 400,
-            body: err
+    child_process.exec('curl --version', (err, stdout, stderr) => {
+        console.log('curl --version INFO',{
+            err, stdout, stderr
         });
     })
+
+    // request.get(url).then(({ data }) => {
+    //     console.log('File fetched success.');
+
+    //     return callback(null, {
+    //         headers: {
+    //             "Content-Type": "text/plain; charset=utf-8"
+    //         },
+    //         statusCode: 200,
+    //         body: 'Download Success' 
+    //     });
+    // }).catch(err => {
+    //     console.log('Error', err);
+    //     return callback(null, {
+    //         headers: {
+    //             "Content-Type": "text/plain; charset=utf-8"
+    //         },
+    //         statusCode: 400,
+    //         body: err
+    //     });
+    // })
 }
