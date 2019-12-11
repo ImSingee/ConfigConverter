@@ -2,6 +2,9 @@
   functions = "./functions"
   command = "yarn build"
 
+[environment]
+  NODE_VERSION = "12"
+
 [template.environment]
   FORCE_PASSWORD = "设置为 True 表示强制设置密码"
   PASSWORD = "设置一个密码"

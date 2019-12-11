@@ -29,13 +29,13 @@ exports.handler = function (event, context, callback) {
             body: data
         });
     }).catch(err => {
-        console.log('Error', err);
+        console.error('Error', err);
         return callback(null, {
             headers: {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 400,
-            body: err
+            body: '请求错误，请查看日志'
         });
     })
 }
