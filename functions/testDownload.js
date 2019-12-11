@@ -15,13 +15,21 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 400,
-            body: "参数 src 无效，请检查是否提供了正确的 Surge Profile 托管地址。"
+            body: "参数 src 无效，请检查是否提供了正确的网址。"
         });
     }
 
     child_process.exec('curl --version', (err, stdout, stderr) => {
         console.log('curl --version INFO',{
             err, stdout, stderr
+        });
+
+        return callback(null, {
+            headers: {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            statusCode: 200,
+            body: "Done"
         });
     })
 
