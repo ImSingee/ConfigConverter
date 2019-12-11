@@ -19,8 +19,8 @@ exports.handler = function (event, context, callback) {
         });
     }
 
-    child_process.exec('curl --version', (err, stdout, stderr) => {
-        console.log('curl --version INFO',{
+    child_process.exec('curl -v -i ' + url, (err, stdout, stderr) => {
+        console.log('curl  INFO',{
             err, stdout, stderr
         });
 
