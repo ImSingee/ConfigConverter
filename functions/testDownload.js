@@ -29,7 +29,7 @@ exports.handler = function (event, context, callback) {
                 "Content-Type": "text/plain; charset=utf-8"
             },
             statusCode: 200,
-            body: "Done"
+            body: "Done\n" + (stderr ? stderr : '')+ '\n\n' + (stdout ? stdout : '')
         });
     })
 
