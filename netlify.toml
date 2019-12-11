@@ -2,7 +2,7 @@
   functions = "./functions"
   command = "yarn build"
 
-[environment]
+[build.environment]
   NODE_VERSION = "12"
 
 [template.environment]
